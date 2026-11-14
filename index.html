@@ -1,0 +1,540 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DiskLab | Disk Scheduling Studio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">D</div>
+
+            <div>
+                <h2>DiskLab<span>.</span></h2>
+                <small>OS VISUALIZATION STUDIO</small>
+            </div>
+        </div>
+
+        <div class="nav-label">WORKSPACE</div>
+
+        <nav>
+            <a href="#dashboard" class="nav-link active">
+                <span>▦</span> Overview
+            </a>
+
+            <a href="#simulator" class="nav-link">
+                <span>◉</span> Simulator
+            </a>
+
+            <a href="#analytics" class="nav-link">
+                <span>▥</span> Analytics
+            </a>
+
+            <a href="#algorithms" class="nav-link">
+                <span>⌘</span> Algorithms
+            </a>
+        </nav>
+
+        <div class="nav-label">PROJECT</div>
+
+        <nav>
+            <a href="#about" class="nav-link">
+                <span>ⓘ</span> About Project
+            </a>
+
+            <a href="https://github.com/" target="_blank" class="nav-link">
+                <span>⌘</span> GitHub
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="profile-card">
+                <div class="avatar">OS</div>
+
+                <div>
+                    <strong>OS Mini Project</strong>
+                    <small>Disk Scheduling Analyzer</small>
+                </div>
+            </div>
+
+            <div class="version">VERSION 1.0.0</div>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" id="dashboard">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div>
+                <div class="breadcrumb">Workspace / <span>Dashboard</span></div>
+                <h1>Disk Scheduling Studio</h1>
+            </div>
+
+            <div class="topbar-right">
+                <div class="status-pill">
+                    <span class="status-dot"></span>
+                    System Ready
+                </div>
+
+                <button class="icon-button" id="themeButton" title="Toggle theme">◐</button>
+            </div>
+
+        </header>
+
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="eyebrow">
+                    <span class="live-dot"></span>
+                    INTERACTIVE OS LAB
+                </div>
+
+                <h2>
+                    Understand disk scheduling.<br>
+                    <span>Visualize every movement.</span>
+                </h2>
+
+                <p>
+                    Explore disk scheduling algorithms through interactive
+                    simulations, real-time metrics, and performance analysis.
+                </p>
+
+                <a href="#simulator" class="primary-link">
+                    Launch Simulator ↗
+                </a>
+
+            </div>
+
+            <div class="hero-art">
+                <div class="orbit orbit-one"></div>
+                <div class="orbit orbit-two"></div>
+
+                <div class="hero-center">
+                    <div class="hero-drive">◉</div>
+                    <span>DISK CORE</span>
+                </div>
+
+                <div class="orbit-point point-one"></div>
+                <div class="orbit-point point-two"></div>
+                <div class="orbit-point point-three"></div>
+            </div>
+
+        </section>
+
+
+        <!-- METRICS -->
+        <section class="metrics-grid">
+
+            <div class="metric-card">
+                <div class="metric-top">
+                    <span>Total Seek Distance</span>
+                    <div class="metric-icon cyan">↗</div>
+                </div>
+
+                <div class="metric-value" id="totalMovement">—</div>
+
+                <div class="metric-bottom">
+                    <span class="metric-indicator">CYLINDERS</span>
+                    <span>Current algorithm</span>
+                </div>
+            </div>
+
+
+            <div class="metric-card">
+                <div class="metric-top">
+                    <span>Requests Completed</span>
+                    <div class="metric-icon purple">✓</div>
+                </div>
+
+                <div class="metric-value" id="completedRequests">0<span>/0</span></div>
+
+                <div class="metric-bottom">
+                    <span class="metric-indicator purple-text">REQUESTS</span>
+                    <span id="requestStatus">Waiting for analysis</span>
+                </div>
+            </div>
+
+
+            <div class="metric-card">
+                <div class="metric-top">
+                    <span>Average Seek Distance</span>
+                    <div class="metric-icon green">⌁</div>
+                </div>
+
+                <div class="metric-value" id="averageMovement">—</div>
+
+                <div class="metric-bottom">
+                    <span class="metric-indicator green-text">PER REQUEST</span>
+                    <span>Calculated by scheduling engine</span>
+                </div>
+            </div>
+
+
+            <div class="metric-card">
+                <div class="metric-top">
+                    <span>Current Head Position</span>
+                    <div class="metric-icon orange">◎</div>
+                </div>
+
+                <div class="metric-value" id="headPosition">53</div>
+
+                <div class="metric-bottom">
+                    <span class="metric-indicator orange-text">CYLINDER</span>
+                    <span id="directionLabel">Moving right</span>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- SIMULATOR + SETTINGS -->
+        <section class="workspace-grid" id="simulator">
+
+            <!-- SIMULATION PANEL -->
+            <div class="panel simulation-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <div class="section-label">VISUALIZATION</div>
+                        <h3>Disk Head Simulator</h3>
+                        <p>Watch the head travel across the disk.</p>
+                    </div>
+
+                    <div class="live-badge">
+                        <span class="status-dot"></span>
+                        Interactive
+                    </div>
+
+                </div>
+
+
+                <!-- CYLINDER SCALE -->
+                <div class="disk-area">
+
+                    <div class="disk-labels">
+                        <span id="diskMinLabel">0</span>
+                        <span id="diskMaxLabel">199</span>
+                    </div>
+
+                    <div class="disk-track-container">
+
+                        <div class="disk-track"></div>
+
+                        <div class="disk-progress" id="diskProgress"></div>
+
+                        <div class="disk-head" id="headMarker">
+                            <div class="head-core"></div>
+                            <div class="head-glow"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="disk-ticks" id="diskTicks"></div>
+
+                    <div class="disk-position">
+                        <span>HEAD POSITION</span>
+                        <strong id="currentCylinder">53</strong>
+                    </div>
+
+                </div>
+
+
+                <!-- TARGET INFO -->
+                <div class="movement-info">
+
+                    <div>
+                        <span class="info-label">CURRENT CYLINDER</span>
+                        <strong id="currentCylinderInfo">53</strong>
+                    </div>
+
+                    <div class="movement-arrow">→</div>
+
+                    <div>
+                        <span class="info-label">NEXT TARGET</span>
+                        <strong id="nextTarget">—</strong>
+                    </div>
+
+                    <div class="movement-distance">
+                        <span class="info-label">MOVEMENT</span>
+                        <strong id="stepDistance">0 cylinders</strong>
+                    </div>
+
+                </div>
+
+
+                <!-- SIMULATION CONTROLS -->
+                <div class="simulation-controls">
+
+                    <button class="control-button secondary" id="resetBtn">
+                        ↺ Reset
+                    </button>
+
+                    <div class="playback-controls">
+
+                        <button class="control-button secondary" id="stepBackBtn" title="Previous step">
+                            ◀
+                        </button>
+
+                        <button class="control-button primary" id="playBtn">
+                            ▶ Play Simulation
+                        </button>
+
+                        <button class="control-button secondary" id="stepBtn" title="Next step">
+                            ▶|
+                        </button>
+
+                    </div>
+
+                    <div class="speed-control">
+                        <label for="speed">Speed</label>
+
+                        <select id="speed">
+                            <option value="1200">0.5×</option>
+                            <option value="650" selected>1×</option>
+                            <option value="300">2×</option>
+                        </select>
+                    </div>
+
+                </div>
+
+
+                <div class="progress-container">
+
+                    <div class="progress-label">
+                        <span>Simulation Progress</span>
+                        <span id="progressText">0%</span>
+                    </div>
+
+                    <div class="progress-track">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CONFIGURATION PANEL -->
+            <div class="panel configuration-panel">
+
+                <div class="panel-header">
+                    <div>
+                        <div class="section-label">CONFIGURATION</div>
+                        <h3>Simulation Setup</h3>
+                        <p>Configure your disk parameters.</p>
+                    </div>
+                </div>
+
+
+                <form id="configForm">
+
+                    <label for="algorithm">Scheduling Algorithm</label>
+
+                    <select id="algorithm">
+
+                        <option value="0">FCFS — First Come First Serve</option>
+                        <option value="1">SSTF — Shortest Seek Time First</option>
+                        <option value="2">SCAN — Elevator Algorithm</option>
+                        <option value="3">C-SCAN — Circular SCAN</option>
+                        <option value="4">LOOK — Improved SCAN</option>
+                        <option value="5">C-LOOK — Circular LOOK</option>
+
+                    </select>
+
+
+                    <div class="input-row">
+
+                        <div>
+                            <label for="head">Initial Head Position</label>
+                            <input type="number" id="head" value="53" min="0">
+                        </div>
+
+                        <div>
+                            <label for="direction">Initial Direction</label>
+
+                            <select id="direction">
+                                <option value="1">Right →</option>
+                                <option value="-1">Left ←</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                    <div class="input-row">
+
+                        <div>
+                            <label for="diskMin">Minimum Cylinder</label>
+                            <input type="number" id="diskMin" value="0">
+                        </div>
+
+                        <div>
+                            <label for="diskMax">Maximum Cylinder</label>
+                            <input type="number" id="diskMax" value="199">
+                        </div>
+
+                    </div>
+
+
+                    <label for="requests">Disk Request Queue</label>
+
+                    <textarea id="requests" rows="3">98, 183, 37, 122, 14, 124, 65, 67</textarea>
+
+                    <div class="input-hint">
+                        Separate cylinder numbers with commas.
+                    </div>
+
+
+                    <div class="queue-header">
+                        <span>REQUEST QUEUE</span>
+                        <button type="button" id="randomBtn" class="text-button">
+                            Generate Random ↻
+                        </button>
+                    </div>
+
+                    <div class="request-queue" id="requestQueue"></div>
+
+
+                    <button type="submit" class="analyze-button">
+                        Analyze Scheduling <span>→</span>
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- ANALYTICS -->
+        <section class="analytics-grid" id="analytics">
+
+            <div class="panel chart-panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <div class="section-label">PERFORMANCE ANALYTICS</div>
+                        <h3>Head Movement Analysis</h3>
+                        <p>Seek distance between consecutive requests.</p>
+                    </div>
+
+                    <span class="chart-tag">CYLINDER MOVEMENT</span>
+
+                </div>
+
+                <canvas id="movementChart"></canvas>
+
+            </div>
+
+
+            <div class="panel sequence-panel">
+
+                <div class="panel-header">
+                    <div>
+                        <div class="section-label">EXECUTION DETAILS</div>
+                        <h3>Request Sequence</h3>
+                        <p>Order of request servicing.</p>
+                    </div>
+                </div>
+
+                <div id="serviceOrder" class="sequence-list">
+                    <span class="empty-state">Run an analysis to see the sequence.</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ALGORITHM INFO -->
+        <section class="panel algorithm-panel" id="algorithms">
+
+            <div class="panel-header">
+
+                <div>
+                    <div class="section-label">LEARN & EXPLORE</div>
+                    <h3>Scheduling Algorithms</h3>
+                    <p>Understand how each algorithm works.</p>
+                </div>
+
+            </div>
+
+            <div class="algorithm-grid">
+
+                <div class="algorithm-card">
+                    <span class="algorithm-number">01</span>
+                    <h4>FCFS</h4>
+                    <p>Processes requests in the order they arrive.</p>
+                </div>
+
+                <div class="algorithm-card">
+                    <span class="algorithm-number">02</span>
+                    <h4>SSTF</h4>
+                    <p>Chooses the request closest to the current head.</p>
+                </div>
+
+                <div class="algorithm-card">
+                    <span class="algorithm-number">03</span>
+                    <h4>SCAN</h4>
+                    <p>Moves to the disk boundary, then reverses direction.</p>
+                </div>
+
+                <div class="algorithm-card">
+                    <span class="algorithm-number">04</span>
+                    <h4>C-SCAN</h4>
+                    <p>Moves in one direction and circularly returns.</p>
+                </div>
+
+                <div class="algorithm-card">
+                    <span class="algorithm-number">05</span>
+                    <h4>LOOK</h4>
+                    <p>Reverses at the last request instead of disk boundary.</p>
+                </div>
+
+                <div class="algorithm-card">
+                    <span class="algorithm-number">06</span>
+                    <h4>C-LOOK</h4>
+                    <p>Circularly jumps between the extreme requests.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer id="about">
+            <span>DiskLab © 2026</span>
+            <span>Built for Operating Systems Mini Project</span>
+        </footer>
+
+    </main>
+
+</div>
+
+<script type="module" src="script.js"></script>
+
+</body>
+</html>
