@@ -475,16 +475,11 @@ function highlightSequence() {
     items.forEach(item => {
 
         const index = Number(item.dataset.index);
+        const completed = state.serviceSteps[index] <= state.step;
+        const current = state.serviceSteps[index] === state.step;
 
-        item.style.borderColor =
-            state.serviceSteps[index] <= state.step
-                ? "#4ce0a1"
-                : "#2b3b59";
-
-        item.style.color =
-            state.serviceSteps[index] <= state.step
-                ? "#4ce0a1"
-                : "#b8efff";
+        item.classList.toggle("completed", completed && !current);
+        item.classList.toggle("current", current);
 
     });
 
