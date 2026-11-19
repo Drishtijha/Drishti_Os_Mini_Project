@@ -264,6 +264,7 @@ function moveToStep(index) {
         `${getCompletedRequestCount()}/${state.service.length}`;
 
     highlightSequence();
+    renderChart();
 }
 
 
@@ -548,7 +549,8 @@ function renderChart() {
 
     }
 
-    const points = state.path.map((value, index) => {
+    const visiblePath = state.path.slice(0, state.step + 1);
+    const points = visiblePath.map((value, index) => {
 
         const x = padding.left +
             (state.path.length > 1
