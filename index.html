@@ -253,6 +253,15 @@
 
                     <div class="disk-ticks" id="diskTicks"></div>
 
+                    <div class="request-lanes-header">
+                        <span>REQUEST-BY-REQUEST MOVEMENT</span>
+                        <span id="requestLaneCount">Analyze the queue to begin</span>
+                    </div>
+
+                    <div class="request-lanes" id="requestLanes" aria-live="polite">
+                        <span class="empty-state">Each disk request will get its own track.</span>
+                    </div>
+
                     <div class="disk-position">
                         <span>HEAD POSITION</span>
                         <strong id="currentCylinder">53</strong>
